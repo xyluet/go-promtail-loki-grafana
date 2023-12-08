@@ -1,0 +1,410 @@
+{
+	"annotations": {
+	  "list": [
+		{
+		  "builtIn": 1,
+		  "datasource": {
+			"type": "grafana",
+			"uid": "-- Grafana --"
+		  },
+		  "enable": true,
+		  "hide": true,
+		  "iconColor": "rgba(0, 211, 255, 1)",
+		  "name": "Annotations & Alerts",
+		  "type": "dashboard"
+		}
+	  ]
+	},
+	"editable": true,
+	"fiscalYearStartMonth": 0,
+	"graphTooltip": 0,
+	"id": 1,
+	"links": [],
+	"liveNow": false,
+	"panels": [
+	  {
+		"datasource": {
+		  "type": "loki",
+		  "uid": "P8E80F9AEF21F6940"
+		},
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "palette-classic"
+			},
+			"custom": {
+			  "axisBorderShow": false,
+			  "axisCenteredZero": false,
+			  "axisColorMode": "text",
+			  "axisLabel": "",
+			  "axisPlacement": "auto",
+			  "barAlignment": 0,
+			  "drawStyle": "line",
+			  "fillOpacity": 0,
+			  "gradientMode": "none",
+			  "hideFrom": {
+				"legend": false,
+				"tooltip": false,
+				"viz": false
+			  },
+			  "insertNulls": false,
+			  "lineInterpolation": "linear",
+			  "lineWidth": 1,
+			  "pointSize": 5,
+			  "scaleDistribution": {
+				"type": "linear"
+			  },
+			  "showPoints": "auto",
+			  "spanNulls": false,
+			  "stacking": {
+				"group": "A",
+				"mode": "none"
+			  },
+			  "thresholdsStyle": {
+				"mode": "off"
+			  }
+			},
+			"mappings": [],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			}
+		  },
+		  "overrides": []
+		},
+		"gridPos": {
+		  "h": 8,
+		  "w": 8,
+		  "x": 0,
+		  "y": 0
+		},
+		"id": 1,
+		"options": {
+		  "legend": {
+			"calcs": [],
+			"displayMode": "list",
+			"placement": "bottom",
+			"showLegend": true
+		  },
+		  "tooltip": {
+			"mode": "single",
+			"sort": "none"
+		  }
+		},
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "loki",
+			  "uid": "P8E80F9AEF21F6940"
+			},
+			"editorMode": "code",
+			"expr": "sum(rate({container=\"go-grafana-loki-app-1\"} | json | drop __error__ | tag=\"traffic\" [$__auto])) by (traffic)",
+			"queryType": "range",
+			"refId": "A"
+		  }
+		],
+		"title": "Panel Title",
+		"type": "timeseries"
+	  },
+	  {
+		"datasource": {
+		  "type": "loki",
+		  "uid": "P8E80F9AEF21F6940"
+		},
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "continuous-RdYlGr"
+			},
+			"custom": {
+			  "axisBorderShow": false,
+			  "axisCenteredZero": false,
+			  "axisColorMode": "text",
+			  "axisLabel": "",
+			  "axisPlacement": "auto",
+			  "barAlignment": 0,
+			  "drawStyle": "line",
+			  "fillOpacity": 0,
+			  "gradientMode": "none",
+			  "hideFrom": {
+				"legend": false,
+				"tooltip": false,
+				"viz": false
+			  },
+			  "insertNulls": false,
+			  "lineInterpolation": "linear",
+			  "lineStyle": {
+				"fill": "solid"
+			  },
+			  "lineWidth": 1,
+			  "pointSize": 5,
+			  "scaleDistribution": {
+				"type": "linear"
+			  },
+			  "showPoints": "auto",
+			  "spanNulls": false,
+			  "stacking": {
+				"group": "A",
+				"mode": "none"
+			  },
+			  "thresholdsStyle": {
+				"mode": "off"
+			  }
+			},
+			"mappings": [],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			}
+		  },
+		  "overrides": []
+		},
+		"gridPos": {
+		  "h": 8,
+		  "w": 8,
+		  "x": 8,
+		  "y": 0
+		},
+		"id": 2,
+		"options": {
+		  "legend": {
+			"calcs": [],
+			"displayMode": "table",
+			"placement": "bottom",
+			"showLegend": true
+		  },
+		  "tooltip": {
+			"mode": "single",
+			"sort": "none"
+		  }
+		},
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "loki",
+			  "uid": "P8E80F9AEF21F6940"
+			},
+			"editorMode": "code",
+			"expr": "sum(\n    rate(\n        {container=\"go-grafana-loki-app-1\"}[$__auto]\n        | json\n        | drop __error__\n        | http_status =~ \"5..\"\n    )\n) by (http_status)",
+			"queryType": "range",
+			"refId": "A"
+		  }
+		],
+		"title": "Panel Title",
+		"type": "timeseries"
+	  },
+	  {
+		"datasource": {
+		  "type": "loki",
+		  "uid": "P8E80F9AEF21F6940"
+		},
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "palette-classic"
+			},
+			"custom": {
+			  "axisBorderShow": false,
+			  "axisCenteredZero": false,
+			  "axisColorMode": "text",
+			  "axisLabel": "",
+			  "axisPlacement": "auto",
+			  "barAlignment": 0,
+			  "drawStyle": "line",
+			  "fillOpacity": 0,
+			  "gradientMode": "none",
+			  "hideFrom": {
+				"legend": false,
+				"tooltip": false,
+				"viz": false
+			  },
+			  "insertNulls": false,
+			  "lineInterpolation": "linear",
+			  "lineWidth": 1,
+			  "pointSize": 5,
+			  "scaleDistribution": {
+				"type": "linear"
+			  },
+			  "showPoints": "auto",
+			  "spanNulls": false,
+			  "stacking": {
+				"group": "A",
+				"mode": "none"
+			  },
+			  "thresholdsStyle": {
+				"mode": "off"
+			  }
+			},
+			"mappings": [],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			},
+			"unit": "ms"
+		  },
+		  "overrides": [
+			{
+			  "matcher": {
+				"id": "byFrameRefID",
+				"options": "A"
+			  },
+			  "properties": [
+				{
+				  "id": "displayName",
+				  "value": "P99"
+				}
+			  ]
+			},
+			{
+			  "matcher": {
+				"id": "byFrameRefID",
+				"options": "B"
+			  },
+			  "properties": [
+				{
+				  "id": "displayName",
+				  "value": "P90"
+				}
+			  ]
+			},
+			{
+			  "matcher": {
+				"id": "byFrameRefID",
+				"options": "C"
+			  },
+			  "properties": [
+				{
+				  "id": "displayName",
+				  "value": "P50"
+				}
+			  ]
+			},
+			{
+			  "__systemRef": "hideSeriesFrom",
+			  "matcher": {
+				"id": "byNames",
+				"options": {
+				  "mode": "exclude",
+				  "names": [
+					"P99"
+				  ],
+				  "prefix": "All except:",
+				  "readOnly": true
+				}
+			  },
+			  "properties": [
+				{
+				  "id": "custom.hideFrom",
+				  "value": {
+					"legend": false,
+					"tooltip": false,
+					"viz": true
+				  }
+				}
+			  ]
+			}
+		  ]
+		},
+		"gridPos": {
+		  "h": 8,
+		  "w": 8,
+		  "x": 16,
+		  "y": 0
+		},
+		"id": 3,
+		"options": {
+		  "legend": {
+			"calcs": [
+			  "last"
+			],
+			"displayMode": "list",
+			"placement": "bottom",
+			"showLegend": true
+		  },
+		  "tooltip": {
+			"mode": "single",
+			"sort": "none"
+		  }
+		},
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "loki",
+			  "uid": "P8E80F9AEF21F6940"
+			},
+			"editorMode": "code",
+			"expr": "quantile_over_time(0.99,\n    {container=\"go-grafana-loki-app-1\"}\n    | json\n    | drop __error__\n    | tag=\"traffic\"\n    | unwrap http_duration\n    [$__auto]\n) by (tag)",
+			"queryType": "range",
+			"refId": "A"
+		  },
+		  {
+			"datasource": {
+			  "type": "loki",
+			  "uid": "P8E80F9AEF21F6940"
+			},
+			"editorMode": "code",
+			"expr": "quantile_over_time(0.90,\n    {container=\"go-grafana-loki-app-1\"}\n    | json\n    | drop __error__\n    | tag=\"traffic\"\n    | unwrap http_duration\n    [$__auto]\n) by (tag)",
+			"hide": false,
+			"queryType": "range",
+			"refId": "B"
+		  },
+		  {
+			"datasource": {
+			  "type": "loki",
+			  "uid": "P8E80F9AEF21F6940"
+			},
+			"editorMode": "code",
+			"expr": "quantile_over_time(0.50,\n    {container=\"go-grafana-loki-app-1\"}\n    | json\n    | drop __error__\n    | tag=\"traffic\"\n    | unwrap http_duration\n    [$__auto]\n) by (tag)",
+			"hide": false,
+			"queryType": "range",
+			"refId": "C"
+		  }
+		],
+		"title": "Panel Title",
+		"type": "timeseries"
+	  }
+	],
+	"refresh": "auto",
+	"schemaVersion": 38,
+	"tags": [],
+	"templating": {
+	  "list": []
+	},
+	"time": {
+	  "from": "now-5m",
+	  "to": "now"
+	},
+	"timepicker": {},
+	"timezone": "",
+	"title": "New dashboard",
+	"uid": "fba7ef9c-c279-49c6-af82-6e3b7dd0fc7c",
+	"version": 5,
+	"weekStart": ""
+  }

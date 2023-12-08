@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./app
+    # ports:
+    #   - 8080:8080
+    # volumes:
+    #   - ./app/logs:/var/log
+    # networks:
+    #   - loki
+
+  promtail:
+    build:
+      context: ./promtail
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    #   - ./app/logs:/var/log
+    # command: -config.file=/etc/promtail/promtail.yml
+    # networks:
+    #   - loki
+
+  loki:
+    build:
+      context: ./loki
+  #   image: grafana/loki
+  #   # volumes:
+  #   #   - ./loki/config/loki-config.yml:/etc/loki/local-config.yml
+  #   ports:
+  #     - 3100:3100
+  #   networks:
+  #     - loki
+
+  grafana:
+    build:
+      context: ./grafana
+    #   image: grafana/grafana
+    volumes:
+      - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - 3000:3000
+  #   networks:
+  #     - loki
+
+  # nginx:
+  #   image: nginx:alpine
+  #   volumes:
+  #     - ./logs/nginx/:/var/log/nginx
+  #   ports:
+  #     - 80:80
+  #     - 443:443
